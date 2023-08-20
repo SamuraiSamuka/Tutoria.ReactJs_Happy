@@ -4,7 +4,7 @@ import { FiPlus } from "react-icons/fi";
 import { LayersControl, Marker, Popup, TileLayer, useMapEvents } from "react-leaflet";
 import { MapContainer } from "react-leaflet/MapContainer";
 import "leaflet/dist/leaflet.css";
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 
 // const access_token = process.env.REACT_APP_MAPBOX_TOKEN;
 
@@ -17,7 +17,7 @@ export default function OrphanagesMap() {
       click() {
         map.locate();
       },
-      locationfound(e) {
+      locationfound(e: { latlng: SetStateAction<null>; }) {
         setPosition(e.latlng);
         map.flyTo(e.latlng, map.getZoom());
       },
@@ -31,7 +31,7 @@ export default function OrphanagesMap() {
   }
 
   function findLocation() {
-    function success(pos) {
+    function success(pos: { coords: { latitude: number; longitude: number; }; }) {
       const lat = pos.coords.latitude;
       const long = pos.coords.longitude;
       console.log(lat, long);
@@ -104,16 +104,15 @@ export default function OrphanagesMap() {
               maxZoom={21}
               minZoom={1}
               opacity={1}
-              noWrap={true}
             />
           </LayersControl.BaseLayer>
-          <LayersControl.BaseLayer name="Google">
+          <LayersControl.BaseLayer name="Google(não encontrei o attribution correto)">
             <TileLayer
               url="http://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}"
+              attribution="google"
               maxZoom={21}
               minZoom={1}
               opacity={1}
-              noWrap={true}
             />
           </LayersControl.BaseLayer>
           {/* <LayersControl.BaseLayer checked name="Padrão">
