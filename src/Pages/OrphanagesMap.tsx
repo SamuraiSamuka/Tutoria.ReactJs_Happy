@@ -73,7 +73,7 @@ export default function OrphanagesMap() {
 
 
       <MapContainer
-        style={{height: "100vh", width: "100%", backgroundBlendMode: "hard-light", mixBlendMode: "multiply"}}
+        style={{height: "100vh", width: "100%", backgroundBlendMode: "hard-light"}}
         center={coordenadas} 
         zoom={15}
         className="z-0"

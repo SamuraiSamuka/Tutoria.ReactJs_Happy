@@ -3,7 +3,7 @@ import Root from "./Components/Root/Root.tsx";
 import "./Tailwind.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Landing from "./Pages/Landing.tsx";
-import OrphanagesMap from "./Pages/OrphanagesMap.tsx";
+import OrphanagesMap from "./Pages/OrphanagesMap.jsx";
 
 const router = createBrowserRouter([
   {
