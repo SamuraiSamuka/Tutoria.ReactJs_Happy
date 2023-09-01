@@ -1,41 +1,21 @@
 import { Link } from "react-router-dom";
 import mapMarkerImg from "/map-marker.svg";
 import { FiPlus } from "react-icons/fi";
-import { LayersControl, Marker, Popup, TileLayer, useMapEvents } from "react-leaflet";
-import { MapContainer } from "react-leaflet/MapContainer";
+import { LayersControl, TileLayer, MapContainer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import { SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 // const access_token = process.env.REACT_APP_MAPBOX_TOKEN;
 
 export default function OrphanagesMap() {
-  const [coordenadas, setCoordenadas] = useState([-11.332442591499072, -38.95533760198204]);
-
-  function LocationMarker() {
-    const [position, setPosition] = useState(null);
-    const map = useMapEvents({
-      click() {
-        map.locate();
-      },
-      locationfound(e: { latlng: SetStateAction<null>; }) {
-        setPosition(e.latlng);
-        map.flyTo(e.latlng, map.getZoom());
-      },
-    });
-  
-    return position === null ? null : (
-      <Marker position={position}>
-        <Popup>You are here</Popup>
-      </Marker>
-    );
-  }
+  const [coordenadas, setCoordenadas] = useState({ lat: -11.332442591499072, lng: -38.95533760198204});
 
   function findLocation() {
     function success(pos: { coords: { latitude: number; longitude: number; }; }) {
       const lat = pos.coords.latitude;
-      const long = pos.coords.longitude;
-      console.log(lat, long);
-      setCoordenadas([lat, long]);
+      const lng = pos.coords.longitude;
+      console.log(lat, lng);
+      setCoordenadas({lat, lng});
     }
   
     const options = {
@@ -133,7 +113,6 @@ export default function OrphanagesMap() {
               noWrap={true}
             />
           </LayersControl.BaseLayer> */}
-          <LocationMarker />
         </LayersControl>
       </MapContainer>
 
